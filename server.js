@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var player = require('play-sound') (opts = {});
 var fs = require('fs');
+
+var speak = require('simple-tts');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -24,6 +28,12 @@ console.log("Running Server on " + listener.address().port +' ...');
 function playGong (req, res) {
 
   console.log('In playGong...');
+
+
+  speak('go greg smith. 100,000 in new ARR', {format:'mp3', filename:'mp3/hello_world'});
+  player.play('mp3/hello_world.mp3', function (err) {
+     if (err) throw err
+  }) 
 
   console.log(req.body);
 
